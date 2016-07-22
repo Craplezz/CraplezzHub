@@ -42,7 +42,7 @@ public class PlayerJoinListener implements Listener {
 					new AbstractMap.SimpleEntry<>(13, "build"),
 					new AbstractMap.SimpleEntry<>(15, "design")
 			)) {
-				CachedServerInfo serverInfo = Core.getServerManager().fetchServerInfo(entry.getValue(), false);
+				CachedServerInfo serverInfo = Core.getServerManager().getServerInfo(entry.getValue());
 				if (serverInfo == null || serverInfo.isOffline()) {
 					menu.setItem(entry.getKey(), ItemBuilders.firework().effect(FireworkEffect.builder().withColor(Color.BLUE).build()).name("§cOffline").lore(Arrays.asList(
 							"§7Spieler§8:§7 - §8/§7 -"
