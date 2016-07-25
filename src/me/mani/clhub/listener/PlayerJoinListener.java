@@ -40,7 +40,7 @@ public class PlayerJoinListener implements Listener {
 			for (Map.Entry<Integer, String> entry : Arrays.asList(
 					new AbstractMap.SimpleEntry<>(11, "drecksteam"),
 					new AbstractMap.SimpleEntry<>(13, "build"),
-					new AbstractMap.SimpleEntry<>(15, "design")
+					new AbstractMap.SimpleEntry<>(15, "lobby")
 			)) {
 				CachedServerInfo serverInfo = Core.getServerManager().getServerInfo(entry.getValue());
 				if (serverInfo == null || serverInfo.isOffline()) {
