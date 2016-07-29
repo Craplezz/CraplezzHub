@@ -39,9 +39,6 @@ public class Hub extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new BlockBreakListener(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
-		Bukkit.getPluginManager().registerEvents(new PlayerInteractListener(), this);
-		Bukkit.getPluginManager().registerEvents(new InventoryCloseListener(), this);
-		Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
 		Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), this);
 		
 	}
