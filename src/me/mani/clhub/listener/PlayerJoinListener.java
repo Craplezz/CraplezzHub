@@ -12,6 +12,7 @@ import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
@@ -34,6 +35,11 @@ public class PlayerJoinListener implements Listener {
 		inventory.clear();
 		inventory.setItem(2, ItemBuilders.normal(Material.EYE_OF_ENDER).name(localeManager.translate("item-switch-server")).build());
 		ClickManager.getClickManager(event.getPlayer()).addHotbarClickListener(2, (interactEvent) -> {
+
+			if (interactEvent.getAction() == Action.PHYSICAL) {
+				return;
+			}
+
 			Inventory menu = Bukkit.createInventory(null, 27);
 			for (Map.Entry<Integer, String> entry : Arrays.asList(
 					new AbstractMap.SimpleEntry<>(11, "drecksteam"),
@@ -47,10 +53,13 @@ public class PlayerJoinListener implements Listener {
 					)).hide(ItemFlag.values()).build());
 				}
 				else {
-					String motd = serverInfo.getMotd().split("\n")[0];
-					menu.setItem(entry.getKey(), ItemBuilders.firework().effect(FireworkEffect.builder().withColor(Color.BLUE).build()).name(motd).lore(Arrays.asList(
-							"§7Spieler§8:§7 " + serverInfo.getOnlinePlayers() + " §8/§7 " + serverInfo.getMaxPlayers()
-					)).hide(ItemFlag.values()).build());
+					String[] motd = serverInfo.getMotd().split("\n");
+					menu.setItem(entry.getKey(), ItemBuilders.firework().effect(FireworkEffect.builder().withColor(Color.BLUE).build())
+							.name(motd[0].replaceAll("%player%", event.getPlayer().getName()))
+							.lore(Arrays.asList(
+								(motd.length > 1 ? motd[1].replaceAll("%player%", event.getPlayer().getName()) : ""),
+								"§7Spieler§8:§7 " + serverInfo.getOnlinePlayers() + " §8/§7 " + serverInfo.getMaxPlayers()
+							)).hide(ItemFlag.values()).build());
 					ClickManager.getClickManager(event.getPlayer()).addInventoryClickListener(entry.getKey(), (clickEvent) -> {
 						Core.getServerManager().connect(event.getPlayer(), entry.getValue());
 					});
