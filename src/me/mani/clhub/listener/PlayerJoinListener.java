@@ -29,8 +29,6 @@ public class PlayerJoinListener implements Listener {
 		
 		event.getPlayer().teleport(event.getPlayer().getWorld().getSpawnLocation());
 		
-		ClickManager.register(event.getPlayer());
-		
 		Inventory inventory = event.getPlayer().getInventory();
 		LocaleManager localeManager = Core.getLocaleManager();
 		inventory.clear();
