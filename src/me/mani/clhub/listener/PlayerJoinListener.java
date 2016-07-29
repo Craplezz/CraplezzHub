@@ -34,7 +34,6 @@ public class PlayerJoinListener implements Listener {
 		inventory.clear();
 		inventory.setItem(2, ItemBuilders.normal(Material.EYE_OF_ENDER).name(localeManager.translate("item-switch-server")).build());
 		ClickManager.getClickManager(event.getPlayer()).addHotbarClickListener(2, (interactEvent) -> {
-			System.out.println("Debug 2");
 			Inventory menu = Bukkit.createInventory(null, 27);
 			for (Map.Entry<Integer, String> entry : Arrays.asList(
 					new AbstractMap.SimpleEntry<>(11, "drecksteam"),
